@@ -1,7 +1,6 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Movies from './components/movies';
-import Favorites from './components/favorites';
 import Navbar from './components/navbar';
 import Register from './components/register';
 import Login from './components/login';
@@ -15,7 +14,6 @@ function App() {
       <Navbar />
       <Switch>
         <Route path='/movies' component={Movies} />
-        <Route path='/favorites' component={Favorites} />
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
         <Route path='/movies-details/:id' component={MovieDetails} />
