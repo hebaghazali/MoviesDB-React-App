@@ -12,10 +12,8 @@ import Favorites from './components/favorites';
 
 function App() {
   const validatorFunction = () => {
-    return true; //your validation logic
+    return true;
   };
-
-  console.log(GuardedRoute);
 
   return (
     <div>
@@ -26,7 +24,6 @@ function App() {
         <Route path='/register' component={Register} />
         <Route path='/movies-details/:id' component={MovieDetails} />
         <Redirect from='/' exact to='/movies' />
-        {/* <Route path='/favorites' component={Favorites} /> */}
 
         <GuardedRoute
           path='/favorites'
