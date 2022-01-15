@@ -14,6 +14,12 @@ const Navbar = () => {
                 <span className='visually-hidden'>(current)</span>
               </NavLink>
             </li>
+            <li className='nav-item'>
+              <NavLink className='nav-link' to='/favorites'>
+                Favorites
+                <span className='visually-hidden'>(current)</span>
+              </NavLink>
+            </li>
           </ul>
           <ul className='navbar-nav flex-row'>
             <li className='nav-item'>
