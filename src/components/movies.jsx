@@ -25,19 +25,21 @@ const Movies = () => {
 
   useEffect(() => {
     axiosInstance
-      .get('/search/movie?&query=' + valueFilter)
-      .then(res => {
-        setMoviesList(res.data.results);
-      })
-      .catch(err => console.log(err));
-  }, [valueFilter]);
-
-  useEffect(() => {
-    axiosInstance
       .get('/movie/popular?&page=' + pageNum)
       .then(res => setMoviesList(res.data.results))
       .catch(err => console.log(err));
   }, [pageNum]);
+
+  useEffect(() => {
+    if (valueFilter) {
+      axiosInstance
+        .get('/search/movie?&query=' + valueFilter)
+        .then(res => {
+          setMoviesList(res.data.results);
+        })
+        .catch(err => console.log(err));
+    }
+  }, [valueFilter]);
 
   return (
     <>
