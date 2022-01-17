@@ -5,3 +5,16 @@ const axiosInstance = axios.create({
 });
 
 export default axiosInstance;
+
+axiosInstance.interceptors.request.use(config => {
+  config.params = {
+    api_key: '89ca530b74d668933ea9c43f8c3fdb73',
+  };
+
+  config.headers = {
+    'content-type': 'application/json',
+  };
+
+  console.log(config);
+  return config;
+});

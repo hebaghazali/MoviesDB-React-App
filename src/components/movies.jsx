@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 
 import axiosInstance from '../axiosConfig';
 import MoviesCard from './moviesCard';
+import SearchBar from './searchBar';
 
 const Movies = () => {
   const [moviesList, setMoviesList] = useState([]);
   const [pageNum, setPageNum] = useState(1);
+  const [valueFilter, setValueFilter] = useState();
 
   const goToPrevPage = () => {
     if (pageNum === 1) return;
@@ -17,12 +19,22 @@ const Movies = () => {
     setPageNum(pageNum + 1);
   };
 
+  const Search = value => {
+    setValueFilter(value);
+  };
+
   useEffect(() => {
     axiosInstance
-      .get(
-        '/movie/popular?api_key=89ca530b74d668933ea9c43f8c3fdb73&page=' +
-          pageNum
-      )
+      .get('/search/movie?&query=' + valueFilter)
+      .then(res => {
+        setMoviesList(res.data.results);
+      })
+      .catch(err => console.log(err));
+  }, [valueFilter]);
+
+  useEffect(() => {
+    axiosInstance
+      .get('/movie/popular?&page=' + pageNum)
       .then(res => setMoviesList(res.data.results))
       .catch(err => console.log(err));
   }, [pageNum]);
@@ -30,19 +42,21 @@ const Movies = () => {
   return (
     <>
       <h4 className='ms-5 my-3'>Movies</h4>
+
+      <SearchBar onSearch={Search} />
+
       <div className='d-flex flex-wrap justify-content-center'>
         {moviesList.map(movie => {
-          const { backdrop_path, original_title, vote_average, overview, id } =
-            movie;
+          const { poster_path, original_title, vote_average, id } = movie;
 
           return (
             <div key={movie.id}>
               <MoviesCard
-                path={backdrop_path}
+                path={poster_path}
                 title={original_title}
                 vote={vote_average}
-                overview={overview}
                 id={id}
+                page={'movies'}
               />
             </div>
           );

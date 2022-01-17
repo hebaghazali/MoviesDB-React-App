@@ -12,7 +12,7 @@ const MovieDetails = () => {
 
   useEffect(() => {
     axiosInstance
-      .get(`/movie/${params.id}?api_key=89ca530b74d668933ea9c43f8c3fdb73`)
+      .get(`/movie/${params.id}?`)
       .then(res => setMovieDetails(res.data))
       .catch(err => console.log(err));
   }, [params.id]);
