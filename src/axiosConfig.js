@@ -15,6 +15,5 @@ axiosInstance.interceptors.request.use(config => {
     'content-type': 'application/json',
   };
 
-  console.log(config);
   return config;
 });
