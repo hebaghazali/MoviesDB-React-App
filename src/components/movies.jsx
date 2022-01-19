@@ -49,12 +49,12 @@ const Movies = () => {
 
       <div className='d-flex flex-wrap justify-content-center'>
         {moviesList.map(movie => {
-          const { poster_path, original_title, vote_average, id } = movie;
+          const { backdrop_path, original_title, vote_average, id } = movie;
 
           return (
             <div key={movie.id}>
               <MoviesCard
-                path={poster_path}
+                path={backdrop_path}
                 title={original_title}
                 vote={vote_average}
                 id={id}
