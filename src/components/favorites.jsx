@@ -8,8 +8,6 @@ const Favorites = () => {
 
   return (
     <>
-      {/* <SearchBar onSearch={Search} /> */}
-
       <div className='d-flex flex-wrap justify-content-center mt-5'>
         {favList.length === 0 ? (
           <h1>There are no favorite movies</h1>
