@@ -13,9 +13,7 @@ export default function favoritesReducer(state = initial, action) {
     case 'REMOVE_FAVORITE':
       return {
         ...state,
-        favList: state.favList.filter(item => {
-          return item.id !== action.payload.id;
-        }),
+        favList: state.favList.filter(item => item.id !== action.payload.id),
       };
     case 'INCREMENT':
       return {
