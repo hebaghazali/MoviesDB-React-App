@@ -8,7 +8,13 @@ const MovieDetails = () => {
 
   const { original_title, overview, status, backdrop_path } = movieDetails;
 
-  const img_URL = `https://image.tmdb.org/t/p/w500/${backdrop_path}`;
+  let img_URL;
+  if (backdrop_path) {
+    img_URL = `https://image.tmdb.org/t/p/w500/${backdrop_path}`;
+  } else {
+    img_URL =
+      'https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png';
+  }
 
   useEffect(() => {
     axiosInstance

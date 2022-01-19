@@ -16,7 +16,13 @@ const MoviesCard = props => {
 
   const { path, title, vote, id, page } = props;
 
-  const img_URL = `https://image.tmdb.org/t/p/w500/${path}`;
+  let img_URL;
+  if (path) {
+    img_URL = `https://image.tmdb.org/t/p/w500/${path}`;
+  } else {
+    img_URL =
+      'https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png';
+  }
 
   const favIcon = useRef(null);
 
@@ -85,7 +91,7 @@ const MoviesCard = props => {
       >
         <img
           className='card-img-top'
-          src={`${img_URL}`}
+          src={img_URL}
           alt='Card cap'
           style={{ minHeight: '300px', maxHeight: '300px', objectFit: 'cover' }}
         />
