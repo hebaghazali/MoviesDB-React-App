@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axiosInstance from '../axiosConfig';
+
+import getMoviesDetails from './../store/actions/moviesDetails';
+import { useDispatch, useSelector } from 'react-redux';
 
 const MovieDetails = () => {
   const params = useParams();
-  const [movieDetails, setMovieDetails] = useState({});
+
+  const dispatch = useDispatch();
+  const movieDetails = useSelector(state => state.moviesDetailsReducer);
 
   const { original_title, overview, status, backdrop_path } = movieDetails;
 
@@ -17,11 +21,8 @@ const MovieDetails = () => {
   }
 
   useEffect(() => {
-    axiosInstance
-      .get(`/movie/${params.id}?`)
-      .then(res => setMovieDetails(res.data))
-      .catch(err => console.log(err));
-  }, [params.id]);
+    dispatch(getMoviesDetails(params.id));
+  }, [params.id, dispatch]);
 
   return (
     <div className='container d-flex flex-column align-items-center'>

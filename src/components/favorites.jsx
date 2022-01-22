@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import MoviesCard from './moviesCard';
 
 const Favorites = () => {
-  const favList = useSelector(state => state.favList);
+  const favList = useSelector(state => state.favoritesReducer.favList);
 
   return (
     <>

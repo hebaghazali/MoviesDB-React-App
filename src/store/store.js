@@ -1,7 +1,11 @@
-import { createStore } from 'redux';
-import favoritesReducer from './reducer';
+import { applyMiddleware, createStore } from 'redux';
+import thunk from 'redux-thunk';
+import combineReducers from './combine';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-const store = createStore(favoritesReducer, composeWithDevTools());
+const store = createStore(
+  combineReducers,
+  composeWithDevTools(applyMiddleware(thunk))
+);
 
 export default store;

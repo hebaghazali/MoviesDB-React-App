@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
-  const favCount = useSelector(state => state.favCount);
+  const favCount = useSelector(state => state.favoritesReducer.favCount);
 
   return (
     <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>

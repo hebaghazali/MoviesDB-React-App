@@ -5,12 +5,12 @@ import {
   removeFromFavorites,
   increaseCounter,
   decrementCounter,
-} from './../store/action';
+} from '../store/actions/favorites';
 
 import { Link } from 'react-router-dom';
 
 const MoviesCard = props => {
-  const favList = useSelector(state => state.favList);
+  const favList = useSelector(state => state.favoritesReducer.favList);
 
   const dispatch = useDispatch();
 

@@ -1,13 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
-import axiosInstance from '../axiosConfig';
 import MoviesCard from './moviesCard';
 import SearchBar from './searchBar';
+import getMovies, { getFilteredMovies } from './../store/actions/movies';
+import { useDispatch, useSelector } from 'react-redux';
+import { languageContext } from '../contexts/languageContext';
 
 const Movies = () => {
-  const [moviesList, setMoviesList] = useState([]);
   const [pageNum, setPageNum] = useState(1);
   const [valueFilter, setValueFilter] = useState();
+
+  const dispatch = useDispatch();
+  const moviesList = useSelector(state => state.moviesReducer);
+
+  const { lang, setLang } = useContext(languageContext);
+
+  const toggleLanguage = () => {
+    setLang(lang === 'en' ? 'ar' : 'en');
+  };
 
   const goToPrevPage = () => {
     if (pageNum === 1) return;
@@ -24,30 +34,34 @@ const Movies = () => {
   };
 
   useEffect(() => {
-    axiosInstance
-      .get('/movie/popular?&page=' + pageNum)
-      .then(res => setMoviesList(res.data.results))
-      .catch(err => console.log(err));
-  }, [pageNum]);
+    dispatch(getMovies(pageNum));
+  }, [pageNum, dispatch]);
 
   useEffect(() => {
     if (valueFilter) {
-      axiosInstance
-        .get('/search/movie?&query=' + valueFilter)
-        .then(res => {
-          setMoviesList(res.data.results);
-        })
-        .catch(err => console.log(err));
+      dispatch(getFilteredMovies(valueFilter));
     }
-  }, [valueFilter]);
+  }, [valueFilter, dispatch]);
 
   return (
     <>
-      <h4 className='ms-5 my-3'>Movies</h4>
+      <header className='d-flex justify-content-between align-items-center mx-5 px-5'>
+        <h4 className='my-3'>Movies</h4>
+        <h5
+          className='language'
+          style={{ cursor: 'pointer' }}
+          onClick={toggleLanguage}
+        >
+          {lang}
+        </h5>
+      </header>
 
       <SearchBar onSearch={Search} />
 
-      <div className='d-flex flex-wrap justify-content-center'>
+      <div
+        className='d-flex flex-wrap justify-content-center'
+        dir={lang === 'en' ? 'ltr' : 'rtl'}
+      >
         {moviesList.map(movie => {
           const { backdrop_path, original_title, vote_average, id } = movie;
 
