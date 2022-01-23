@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   addToFavorites,
   removeFromFavorites,
-  increaseCounter,
+  incrementCounter,
   decrementCounter,
 } from './../store/action';
 
@@ -30,7 +30,7 @@ const MoviesCard = props => {
     if (favIcon.current.classList.contains('far')) {
       favIcon.current.classList.replace('far', 'fas');
       dispatch(addToFavorites(props));
-      dispatch(increaseCounter());
+      dispatch(incrementCounter());
     } else {
       favIcon.current.classList.replace('fas', 'far');
       dispatch(removeFromFavorites(props));

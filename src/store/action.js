@@ -12,7 +12,7 @@ export function removeFromFavorites(data) {
   };
 }
 
-export function increaseCounter() {
+export function incrementCounter() {
   return {
     type: 'INCREMENT',
   };
